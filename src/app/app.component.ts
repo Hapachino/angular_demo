@@ -9,8 +9,8 @@ export class AppComponent {
   recipes = false;
   shopping = false;
 
-  renderComponent(link) {
-    switch(link.link) {
+  renderComponent(link: string) {
+    switch(link) {
       case 'recipes': 
         this.shopping = false;
         this.recipes = true;

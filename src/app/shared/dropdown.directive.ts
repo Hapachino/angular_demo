@@ -4,15 +4,9 @@ import { Directive, HostListener, ElementRef, HostBinding } from '@angular/core'
   selector: '[appDropdown]',
 })
 export class DropdownDirective {
-  @HostListener('click') onClick() {
-    if (this.class.includes('open')) {
-      this.class = "btn-group";
-    } else {
-      this.class = "btn-group open";
-    }
-  }
+  @HostBinding('class.open') isOpen = false;
 
-  @HostBinding('class') class: string = "btn-group";
-  
-  constructor() {}
+  @HostListener('click') toggleOpen() {
+    this.isOpen = !this.isOpen;
+  }
 }

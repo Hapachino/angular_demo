@@ -1,22 +1,24 @@
 <nav class="navbar navbar-default">
   <div class="container-fluid">
     <div class="navbar-header">
-      <a href="#" class="navbar-brand">Recipe Book</a>
+      <a 
+        routerLink='' 
+        class="navbar-brand"
+        >Recipe Book
+      </a>
     </div>
 
     <div class="navbar-default">
       <ul class="nav navbar-nav">
         <li>
           <a 
-            (click)="onLinkClicked('recipes')"  
-            href="#">
+            routerLink="recipes">
             Recipes
           </a>
         </li>
         <li>
           <a 
-            (click)="onLinkClicked('shopping')"
-            href="#">
+            routerLink="shopping-list">
             Shopping List
           </a>
         </li>

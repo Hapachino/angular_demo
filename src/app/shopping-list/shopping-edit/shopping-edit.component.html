@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-xs-12">
-    <form #f="ngForm" (ngSubmit)="onAddIngredient(f.value)">
+    <form #f="ngForm" (ngSubmit)="onSubmit(f.value)">
       <div class="row">
         <div class="col-sm-5 form-group">
           <label for="name">Name</label>
@@ -36,7 +36,12 @@
             type="button">
             Delete
           </button>
-          <button class="btn btn-primary" type="button">Clear</button>
+          <button 
+            class="btn btn-primary" 
+            type="button"
+            (click)="clear()">
+            Clear
+          </button>
         </div>
       </div>
     </form>

@@ -31,15 +31,17 @@
             [disabled]="!f.valid">
             {{ editMode ? 'Update' : 'Add' }}
           </button>
-          <button 
+          <button
+            *ngIf="editMode"
             class="btn btn-danger" 
-            type="button">
+            type="button"
+            (click)="onDelete()">
             Delete
           </button>
           <button 
             class="btn btn-primary" 
             type="button"
-            (click)="clear()">
+            (click)="onClear()">
             Clear
           </button>
         </div>

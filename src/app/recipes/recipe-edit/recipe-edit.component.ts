@@ -32,6 +32,19 @@ export class RecipeEditComponent implements OnInit {
     console.log(this.recipeForm);
   }
 
+  onAddIngredient() {
+    (<FormArray>this.recipeForm.get('ingredients')).push(
+      this.addIngredientFormGroup(null, null)
+    );
+  }
+
+  private addIngredientFormGroup(name, amount) {
+    return new FormGroup({
+      name: new FormControl(name),
+      amount: new FormControl(amount),
+    })
+  }
+
   private initForm() {
     let recipeName = '';
     let recipeImagePath = '';
@@ -47,10 +60,7 @@ export class RecipeEditComponent implements OnInit {
       if (ingredients) {
         ingredients.forEach(({ name, amount }) => {
           recipeIngredients.push(
-            new FormGroup({
-              name: new FormControl(name),
-              amount: new FormControl(amount),
-            })
+            this.addIngredientFormGroup(name, amount)
           );
         });
       }

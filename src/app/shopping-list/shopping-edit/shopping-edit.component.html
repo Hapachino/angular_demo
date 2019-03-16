@@ -29,7 +29,7 @@
           <button 
             class="btn btn-success"
             [disabled]="!f.valid">
-            Add
+            {{ editMode ? 'Update' : 'Add' }}
           </button>
           <button 
             class="btn btn-danger" 

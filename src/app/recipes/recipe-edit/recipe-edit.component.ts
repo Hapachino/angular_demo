@@ -3,6 +3,7 @@ import { ActivatedRoute, Params } from '@angular/router';
 import { FormGroup, FormControl, FormArray, Validators } from '@angular/forms';
 
 import RecipeService from '../recipe.service';
+import { Recipe } from '../recipe.model';
 
 @Component({
   selector: 'app-recipe-edit',
@@ -22,14 +23,18 @@ export class RecipeEditComponent implements OnInit {
       .subscribe(
         (params: Params) => {
           this.id = +params['id'];
-          this.editMode = this.id !== null;
+          this.editMode = isFinite(this.id);
           this.initForm();
         }
       );
   }
 
   onSubmit() {
-    console.log(this.recipeForm);
+    if (this.editMode) {
+      this.recipeService.updateRecipe(this.id, this.recipeForm.value);
+    } else {
+      this.recipeService.addRecipe(this.recipeForm.value);
+    }
   }
 
   onAddIngredient() {
@@ -54,18 +59,20 @@ export class RecipeEditComponent implements OnInit {
     let recipeDescription = '';
     let recipeIngredients = new FormArray([]);
 
-    if (this.editMode && this.id) {
-      const { name, imagePath, description, ingredients } = this.recipeService.getRecipe(this.id);
-
-      recipeName = name;
-      recipeImagePath = imagePath;
-      recipeDescription = description;
-      if (ingredients) {
-        ingredients.forEach(({ name, amount }) => {
-          recipeIngredients.push(
-            this.addIngredientFormGroup(name, amount)
-          );
-        });
+    if (this.editMode) {
+      if (this.recipeService.getRecipe(this.id)) {
+        const { name, imagePath, description, ingredients } = this.recipeService.getRecipe(this.id);
+      
+        recipeName = name;
+        recipeImagePath = imagePath;
+        recipeDescription = description;
+        if (ingredients) {
+          ingredients.forEach(({ name, amount }) => {
+            recipeIngredients.push(
+              this.addIngredientFormGroup(name, amount)
+            );
+          });
+        }
       }
     }
 

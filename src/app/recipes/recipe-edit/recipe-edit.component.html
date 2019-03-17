@@ -36,10 +36,11 @@
               type="text"
               id="imagePath"
               formControlName="imagePath"
-              class="form-control">
+              class="form-control"
+              #imagePath>
           </div>
 
-          <img src="" alt="" class="img-responsive">
+          <img [src]="imagePath.value" alt="" class="img-responsive">
 
           <div class="form-group">
             <label for="description">Description</label>
